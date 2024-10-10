@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -8,6 +9,7 @@ public class Player : MonoBehaviour
     public List<Transform> bobers = new List<Transform>();
     public Transform centerPoint; 
     public float radius = 5f;
+    [SerializeField] private TextMeshProUGUI bobersText;
     
 
     // Start is called before the first frame update
@@ -29,6 +31,11 @@ public class Player : MonoBehaviour
             bobers.Add(collider.transform);
             Harmonize();
             CenterChildren();
+            bobersText.text = bobers.Count.ToString();
+        }
+        if(collider.GetComponent<tronc>() != null)
+        {
+            collider.GetComponent<tronc>().Interact(bobers);
         }
     }
 
